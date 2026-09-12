@@ -1,0 +1,105 @@
+# Adapted from Clash Meta for Android issue forms for Clash Meta Plus, 2026-09-13.
+name: "[English] Bug Report"
+description: "Report a bug in this independent Clash Meta Plus fork"
+title: "[BUG] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+
+        NOTE: Be sure to put a clear and concise title **AFTER** `[BUG]` in the text box above.
+
+        NOTE: We do not provide any services such as proxies, DO NOT feedback any problems not caused by this application here.
+
+        This form is for Clash Meta Plus, an independent fork. Upstream projects do not maintain this custom version.
+        Remove subscription URLs, tokens, credentials, server addresses, and personal information from attachments.
+  - type: textarea
+    id: description
+    attributes:
+      label: "Describe the bug"
+      description: "A clear and concise description of what the bug is."
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: "To Reproduce"
+      description: "Steps to reproduce the behavior:"
+      value: |
+        Step 1: ...
+        Step 2: ...
+        Step 3: ...
+        ...
+    validations:
+      required: true
+  - type: textarea
+    id: device-info
+    attributes:
+      label: "Device Info"
+      description: |
+        Input your device information.
+
+        Example:
+        - Device: Pixel 4
+        - ROM: AOSP
+        - Android Version: 10
+      value: |
+        - Device:
+        - ROM:
+        - Android Version:
+    validations:
+      required: true
+  - type: textarea
+    id: app-info
+    attributes:
+      label: "Application Info"
+      description: |
+        Input application you are using information.
+
+        Example:
+        ```
+        - Version: 17.01
+        - APK filename: cmfa-17.01-meta-arm64-v8a-release.apk
+        - Distribution Channel: Local build / this repository
+        ```
+      value: |
+        - Version:
+        - APK filename:
+        - Distribution Channel:
+    validations:
+      required: true
+  - type: textarea
+    id: configure
+    attributes:
+      render: yml
+      label: "Minimal redacted configuration (optional)"
+      description: |
+        Include only the settings necessary to reproduce the issue.
+        Do not upload full subscriptions. Remove credentials, tokens, subscription URLs,
+        server addresses, and personal information. A minimal fictional example is preferred.
+    validations:
+      required: false
+  - type: textarea
+    id: logs
+    attributes:
+      render: raw
+      label: "Logs"
+      description: |
+        Paste only relevant, redacted logs. Remove credentials, URLs, server addresses, and personal information.
+
+        The application Logcat or filtered adb logcat output can help diagnose the issue.
+    validations:
+      required: false
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: "Screenshot"
+      description: "If applicable, add screenshots to help explain your problem."
+      placeholder: "Optional"
+  - type: textarea
+    id: additional
+    attributes:
+      label: "Additional"
+      description: "Add any other context about the problem here."

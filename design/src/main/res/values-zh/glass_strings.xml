@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="glass_home_title">我的网络</string>
+    <string name="glass_connection">连接状态</string>
+    <string name="glass_workspace">网络管理</string>
+    <string name="glass_tools">工具与支持</string>
+</resources>

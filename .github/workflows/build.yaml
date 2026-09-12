@@ -1,0 +1,154 @@
+# Local changes for Clash Meta Plus, 2026-09-13.
+# The upstream build/release workflows are preserved, inactive, in docs/upstream/.
+# This workflow only produces validation artifacts after a manual request.
+# It does not publish releases, push commits/tags, or use release signing secrets.
+name: Build Clash Meta Plus (manual validation)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: manual-build-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      GOTOOLCHAIN: local
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Check out the selected source revision
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          # The Mihomo core is vendored source, not a Git submodule.
+          submodules: false
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v5
+
+      - name: Set up Android SDK tools
+        uses: android-actions/setup-android@v4
+        with:
+          packages: ''
+
+      - name: Install the project's Android toolchain
+        run: |
+          sdkmanager \
+            'platform-tools' \
+            'platforms;android-35' \
+            'build-tools;35.0.0' \
+            'ndk;29.0.14206865' \
+            'cmake;3.22.1'
+
+      - name: Set up the upstream-compatible MetaCubeX Go toolchain
+        # Keep the upstream setup-go revision, which supports this custom source.
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c
+        with:
+          go-download-base-url: 'https://github.com/MetaCubeX/go/releases/download/build'
+          go-version: '1.26'
+          cache: false
+
+      - name: Apply the two Android Go runtime patches
+        run: |
+          patched_go_root="$(go env GOROOT)"
+          for runtime_patch in "$GITHUB_WORKSPACE"/.github/patch/*.patch; do
+            if patch --directory="$patched_go_root" --strip=1 --batch --forward --dry-run < "$runtime_patch"; then
+              patch --directory="$patched_go_root" --strip=1 --batch --forward < "$runtime_patch"
+            elif patch --directory="$patched_go_root" --strip=1 --batch --reverse --dry-run < "$runtime_patch"; then
+              printf 'Patch already applied: %s\n' "$(basename "$runtime_patch")"
+            else
+              printf 'Patch does not match this Go toolchain: %s\n' "$runtime_patch" >&2
+              exit 1
+            fi
+          done
+
+      - name: Build the ARM64 Meta variant
+        # With no signing.properties, this project's Release variant uses the
+        # runner's debug key. This is a CI validation APK, not a release signature.
+        run: |
+          test -f core/src/foss/golang/clash/go.mod
+          test ! -e signing.properties
+          ./gradlew :app:assembleMetaRelease \
+            -Pandroid.injected.build.abi=arm64-v8a \
+            -Pandroid.injected.testOnly=false \
+            --no-daemon --max-workers=4 --console=plain
+
+      - name: Package APK, matching source, notices, and build information
+        id: package
+        run: |
+          # Fail rather than describe modified tracked files as the selected HEAD.
+          git diff --exit-code HEAD -- .
+          mkdir -p dist/go-runtime-patches
+          git archive --format=tar.gz --prefix=Clash-Meta-Plus/ \
+            --output=dist/Clash-Meta-Plus-source.tar.gz HEAD
+          cp LICENSE NOTICE dist/
+          cp -R docs dist/docs
+          cp .github/patch/*.patch dist/go-runtime-patches/
+          python3 - <<'PY'
+          import hashlib
+          import os
+          import pathlib
+          import re
+          import shutil
+          import subprocess
+
+          root = pathlib.Path.cwd()
+          dist = root / 'dist'
+          version = re.search(r'versionName\s*=\s*"([^"]+)"', (root / 'build.gradle.kts').read_text()).group(1)
+          candidates = list((root / 'app/build/intermediates/apk/meta/release').glob('*arm64-v8a*.apk'))
+          if not candidates:
+              candidates = list((root / 'app/build/outputs/apk/meta/release').glob('*arm64-v8a*.apk'))
+          if len(candidates) != 1:
+              raise SystemExit(f'Expected one ARM64 APK, found {len(candidates)}')
+          shutil.copy2(candidates[0], dist / f'Clash-Meta-Plus-{version}-arm64-v8a-ci.apk')
+          commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
+          details = [
+              f'Project: Clash Meta Plus {version}',
+              f'Source commit: {commit}',
+              f'Repository: {os.environ["GITHUB_REPOSITORY"]}',
+              f'Run: {os.environ["GITHUB_SERVER_URL"]}/{os.environ["GITHUB_REPOSITORY"]}/actions/runs/{os.environ["GITHUB_RUN_ID"]}',
+              'APK signature: ephemeral GitHub runner debug key; validation only.',
+              'Source archive: git archive of the exact commit above, including vendored Mihomo,',
+              'Gradle/Go dependency manifests, license files, documentation, and Go runtime patches.',
+              'Downloaded Geo databases are build inputs; hashes are recorded below.',
+              'Their upstream sources and separate licensing requirements are described in the repository documentation.',
+              '',
+          ]
+          for command in (['java', '-version'], ['go', 'version'], ['go', 'env', 'GOROOT']):
+              result = subprocess.run(command, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
+              details.extend(['$ ' + ' '.join(command), result.stdout.strip()])
+          details.extend(['Android SDK: 35', 'Build tools: 35.0.0', 'NDK: 29.0.14206865', 'CMake: 3.22.1', '', 'Downloaded Geo input SHA-256:'])
+          for name in ('geoip.metadb', 'geosite.dat', 'ASN.mmdb', 'BundleMRS.7z'):
+              asset = root / 'app/src/main/assets' / name
+              details.append(f'{hashlib.sha256(asset.read_bytes()).hexdigest()}  {name}')
+          (dist / 'BUILD-INFO.txt').write_text('\n'.join(details) + '\n')
+          checksum_lines = []
+          for artifact in sorted(dist.rglob('*')):
+              if artifact.is_file() and artifact.name != 'SHA256SUMS.txt':
+                  checksum_lines.append(f'{hashlib.sha256(artifact.read_bytes()).hexdigest()}  {artifact.relative_to(dist).as_posix()}')
+          (dist / 'SHA256SUMS.txt').write_text('\n'.join(checksum_lines) + '\n')
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write(f'artifact_name=Clash-Meta-Plus-{version}-arm64-v8a-validation-{commit[:7]}\n')
+          PY
+
+      - name: Upload validation artifacts (no GitHub Release)
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ steps.package.outputs.artifact_name }}
+          path: dist/
+          if-no-files-found: error
+          retention-days: 30

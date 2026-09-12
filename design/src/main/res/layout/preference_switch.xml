@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_glass_clickable"
+        android:clickable="true"
+        android:focusable="true"
+        android:minHeight="@dimen/item_min_height"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:paddingEnd="@dimen/item_tailing_margin">
+
+        <View
+            android:id="@+id/icon_view"
+            android:layout_width="@dimen/item_header_component_size"
+            android:layout_height="@dimen/item_header_component_size"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="@dimen/item_header_margin"
+            android:clickable="false"
+            android:focusable="false" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/switch_view"
+            android:layout_toEndOf="@id/icon_view"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.ClashGlass.Body" />
+
+            <TextView
+                android:id="@+id/summary_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_text_margin"
+                android:textAppearance="@style/TextAppearance.ClashGlass.Caption" />
+        </LinearLayout>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switch_view"
+            app:useMaterialThemeColors="false"
+            app:thumbTint="@color/glass_switch_thumb"
+            app:trackTint="@color/glass_switch_track"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:clickable="false"
+            android:focusable="false" />
+    </RelativeLayout>
+</layout>

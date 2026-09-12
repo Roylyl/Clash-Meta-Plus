@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="self" type="com.github.kr328.clash.design.MainDesign" />
+        <variable name="clashRunning" type="boolean" />
+        <variable name="forwarded" type="String" />
+        <variable name="mode" type="String" />
+        <variable name="profileName" type="String" />
+        <variable name="hasProviders" type="boolean" />
+        <import type="android.view.View" />
+        <import type="com.github.kr328.clash.design.MainDesign.Request" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_glass_canvas"
+        android:paddingStart="@{self.surface.insets.start}"
+        android:paddingEnd="@{self.surface.insets.end}">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/main_padding_horizontal"
+                android:paddingEnd="@dimen/main_padding_horizontal"
+                android:paddingTop="@{self.surface.insets.top}"
+                android:paddingBottom="@{(float) self.surface.insets.bottom + @dimen/glass_page_margin}">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:minHeight="@dimen/main_top_banner_height"
+                    android:orientation="horizontal"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/glass_brand"
+                            android:textAppearance="@style/TextAppearance.ClashGlass.Section" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/glass_home_title"
+                            android:textAppearance="@style/TextAppearance.ClashGlass.LargeTitle" />
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="12dp"
+                        android:background="@drawable/bg_glass_card"
+                        android:elevation="2dp">
+                        <View
+                            android:layout_width="@dimen/main_logo_size"
+                            android:layout_height="@dimen/main_logo_size"
+                            android:layout_gravity="center"
+                            android:background="@drawable/ic_clash"
+                            android:importantForAccessibility="no" />
+                    </FrameLayout>
+                </LinearLayout>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="10dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{() -> self.request(Request.ToggleStatus)}"
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:cardCornerRadius="30dp"
+                    app:cardElevation="3dp"
+                    app:rippleColor="#30FFFFFF"
+                    app:strokeColor="#40FFFFFF"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@{clashRunning ? @drawable/bg_glass_connection_on : @drawable/bg_glass_connection_off}"
+                        android:gravity="center_vertical"
+                        android:minHeight="168dp"
+                        android:orientation="horizontal"
+                        android:padding="24dp">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/glass_connection"
+                                android:textAppearance="@style/TextAppearance.ClashGlass.Section"
+                                android:textColor="#D2E7F4" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="@{clashRunning ? @string/running : @string/stopped}"
+                                android:textColor="@android:color/white"
+                                android:textSize="30sp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:text="@{clashRunning ? @string/format_traffic_forwarded(forwarded) : @string/tap_to_start}"
+                                android:textAppearance="@style/TextAppearance.ClashGlass.Caption"
+                                android:textColor="#DBEAF7" />
+                        </LinearLayout>
+
+                        <FrameLayout
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_marginStart="12dp"
+                            android:background="@drawable/bg_glass_power"
+                            android:importantForAccessibility="no">
+                            <View
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/ic_glass_power" />
+                        </FrameLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp"
+                    android:paddingTop="18dp"
+                    android:paddingBottom="6dp"
+                    android:text="@string/glass_workspace"
+                    android:textAppearance="@style/TextAppearance.ClashGlass.Section" />
+
+                <com.github.kr328.clash.design.view.LargeActionCard
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/main_card_margin_vertical"
+                    android:layout_marginBottom="@dimen/main_card_margin_vertical"
+                    android:onClick="@{() -> self.request(Request.OpenProxy)}"
+                    android:visibility="@{clashRunning ? View.VISIBLE : View.GONE}"
+                    app:icon="@drawable/ic_baseline_apps"
+                    app:subtext="@{mode}"
+                    app:text="@string/proxy" />
+
+                <com.github.kr328.clash.design.view.LargeActionCard
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/main_card_margin_vertical"
+                    android:layout_marginBottom="@dimen/main_card_margin_vertical"
+                    android:onClick="@{() -> self.request(Request.OpenProfiles)}"
+                    app:icon="@drawable/ic_baseline_view_list"
+                    app:subtext="@{profileName != null ? @string/format_profile_activated(profileName) : @string/not_selected}"
+                    app:text="@string/profile" />
+
+                <com.github.kr328.clash.design.view.LargeActionLabel
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/main_label_margin_vertical"
+                    android:layout_marginBottom="@dimen/main_label_margin_vertical"
+                    android:onClick="@{() -> self.request(Request.OpenProviders)}"
+                    android:visibility="@{clashRunning &amp;&amp; hasProviders ? View.VISIBLE : View.GONE}"
+                    app:icon="@drawable/ic_baseline_swap_vertical_circle"
+                    app:text="@string/providers" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp"
+                    android:paddingTop="24dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/glass_tools"
+                    android:textAppearance="@style/TextAppearance.ClashGlass.Section" />
+
+                <com.github.kr328.clash.design.view.LargeActionLabel
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/main_label_margin_vertical"
+                    android:layout_marginBottom="@dimen/main_label_margin_vertical"
+                    android:onClick="@{() -> self.request(Request.OpenLogs)}"
+                    app:icon="@drawable/ic_baseline_assignment"
+                    app:text="@string/logs" />
+                <com.github.kr328.clash.design.view.LargeActionLabel
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/main_label_margin_vertical"
+                    android:layout_marginBottom="@dimen/main_label_margin_vertical"
+                    android:onClick="@{() -> self.request(Request.OpenSettings)}"
+                    app:icon="@drawable/ic_baseline_settings"
+                    app:text="@string/settings" />
+                <com.github.kr328.clash.design.view.LargeActionLabel
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/main_label_margin_vertical"
+                    android:layout_marginBottom="@dimen/main_label_margin_vertical"
+                    android:onClick="@{() -> self.request(Request.OpenHelp)}"
+                    app:icon="@drawable/ic_baseline_help_center"
+                    app:text="@string/help" />
+                <com.github.kr328.clash.design.view.LargeActionLabel
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/main_label_margin_vertical"
+                    android:layout_marginBottom="@dimen/main_label_margin_vertical"
+                    android:onClick="@{() -> self.request(Request.OpenAbout)}"
+                    app:icon="@drawable/ic_baseline_info"
+                    app:text="@string/about" />
+            </LinearLayout>
+        </ScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="aggressive_keep_alive_title">增強背景保活</string>
+    <string name="aggressive_keep_alive_summary">連線期間保持 CPU 喚醒，並避免螢幕關閉時暫停核心。切換立即生效，會增加耗電。</string>
+    <string name="battery_optimization_title">背景電池最佳化</string>
+    <string name="battery_optimization_summary">前往系統設定，將本應用程式的背景電池使用設為不受限制，提高連線穩定性。</string>
+    <string name="battery_optimization_exempt">本應用程式已不受電池最佳化限制，點選可查看系統設定。</string>
+    <string name="always_on_vpn_title">永久連線 VPN</string>
+    <string name="always_on_vpn_summary">前往系統 VPN 設定，為 Clash Meta 開啟「永久連線 VPN」。需使用 VPN 模式。</string>
+    <string name="system_settings_unavailable">無法開啟系統設定，請從裝置設定手動開啟。</string>
+</resources>

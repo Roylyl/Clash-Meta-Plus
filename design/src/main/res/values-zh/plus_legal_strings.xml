@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="plus_legal_category">Clash Meta Plus</string>
+    <string name="plus_modification_title">关于此修改版本</string>
+    <string name="plus_modification_message">Clash Meta Plus 是基于 Clash Meta for Android 的独立修改版本。17.01 于 2026 年 9 月 12–13 日调整了后台运行、最近任务、原生界面、构建配置及文档。\n\n本修改版本按 GNU GPL v3 分发，在适用法律允许范围内不提供担保。原有版权与许可证声明继续归各自作者所有。本项目与 MetaCubeX、原作者及 Apple 无官方隶属或背书关系。\n\n分发者应随版本提供此修改版本的完整对应源码及构建说明。目前尚未配置 Plus 的公开源码地址，请向提供此 APK 的分发者取得源码归档。下方上游链接仅供参考，不是本修改版本的完整源码。</string>
+    <string name="plus_license_title">GNU GPL v3 许可证</string>
+    <string name="plus_notices_title">第三方声明</string>
+    <string name="plus_upstream_sources_tip">以下为上游参考项目。本版本的完整源码请向 APK 分发者取得配套的 Clash Meta Plus 源码包。</string>
+    <string name="plus_about_notice">Clash Meta Plus · 独立修改版本\nGPL v3 · 不提供担保\n许可证与源码信息见「帮助」</string>
+</resources>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Explicit theme attributes also follow the app's manual light/dark setting. -->
+    <attr name="glassCanvasStart" format="color" />
+    <attr name="glassCanvasEnd" format="color" />
+    <attr name="glassSurface" format="color" />
+    <attr name="glassSurfaceHighlight" format="color" />
+    <attr name="glassBorder" format="color" />
+    <attr name="glassIconSurface" format="color" />
+    <attr name="glassTextSecondary" format="color" />
+    <attr name="glassSuccess" format="color" />
+    <attr name="glassToolbarSurface" format="color" />
+
+    <style name="ClashGlassPaletteLight">
+        <item name="glassCanvasStart">#E7F0FB</item>
+        <item name="glassCanvasEnd">#F2F3FA</item>
+        <item name="glassSurface">#DEFFFFFF</item>
+        <item name="glassSurfaceHighlight">#F5FFFFFF</item>
+        <item name="glassBorder">#FFFFFFFF</item>
+        <item name="glassIconSurface">#DCE9FB</item>
+        <item name="glassTextSecondary">#596477</item>
+        <item name="glassSuccess">#16804F</item>
+        <item name="glassToolbarSurface">#F2F1F5FC</item>
+        <item name="colorSurface">#F7FAFF</item>
+        <item name="colorOnSurface">#17243B</item>
+        <item name="colorControlNormal">#17243B</item>
+        <item name="android:textColorPrimary">#17243B</item>
+        <item name="android:textColorSecondary">#596477</item>
+    </style>
+
+    <style name="ClashGlassPaletteDark">
+        <item name="colorOnPrimary">#0B223F</item>
+        <item name="glassCanvasStart">#121E33</item>
+        <item name="glassCanvasEnd">#090F1B</item>
+        <item name="glassSurface">#E0253248</item>
+        <item name="glassSurfaceHighlight">#EE2D3C54</item>
+        <item name="glassBorder">#405C7493</item>
+        <item name="glassIconSurface">#364E6D</item>
+        <item name="glassTextSecondary">#B7C5DB</item>
+        <item name="glassSuccess">#66D89E</item>
+        <item name="glassToolbarSurface">#F219263B</item>
+        <item name="colorSurface">#253248</item>
+        <item name="colorOnSurface">#F1F6FF</item>
+        <item name="colorControlNormal">#F1F6FF</item>
+        <item name="android:textColorPrimary">#F1F6FF</item>
+        <item name="android:textColorSecondary">#B7C5DB</item>
+    </style>
+
+    <style name="TextAppearance.ClashGlass.Body" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+    <style name="TextAppearance.ClashGlass.Caption" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:textColor">?attr/glassTextSecondary</item>
+        <item name="android:lineSpacingExtra">2dp</item>
+    </style>
+    <style name="TextAppearance.ClashGlass.Title" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">23sp</item>
+        <item name="android:letterSpacing">-0.02</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+    <style name="TextAppearance.ClashGlass.LargeTitle" parent="TextAppearance.ClashGlass.Title">
+        <item name="android:textSize">34sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.ClashGlass.Section" parent="TextAppearance.ClashGlass.Caption">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:letterSpacing">0.06</item>
+    </style>
+    <dimen name="glass_page_margin">20dp</dimen>
+    <dimen name="glass_row_spacing">4dp</dimen>
+    <dimen name="glass_card_radius">24dp</dimen>
+    <dimen name="glass_touch_target">48dp</dimen>
+</resources>

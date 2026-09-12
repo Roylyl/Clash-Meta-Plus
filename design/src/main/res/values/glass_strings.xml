@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="glass_home_title">Your network</string>
+    <string name="glass_brand" translatable="false">CLASH META</string>
+    <string name="glass_connection">CONNECTION</string>
+    <string name="glass_workspace">WORKSPACE</string>
+    <string name="glass_tools">TOOLS &amp; SUPPORT</string>
+</resources>

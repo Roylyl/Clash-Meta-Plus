@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="plus_legal_category">Clash Meta Plus</string>
+    <string name="plus_modification_title">About this modified version</string>
+    <string name="plus_modification_message">Clash Meta Plus is an independent modification of Clash Meta for Android. Version 17.01 was modified on September 12–13, 2026: background operation, recent tasks, native UI, build setup and documentation.\n\nDistributed under GNU GPL v3, without warranty to the extent permitted by applicable law. Existing copyright and license notices remain with their respective authors. This project is not affiliated with or endorsed by MetaCubeX, the original authors or Apple.\n\nThe distributor must provide the complete corresponding source for this exact modified version and its build instructions with the release. No public Plus source URL is configured yet; request the source archive from whoever supplied this APK. The upstream links below are references, not the complete source for this modified version.</string>
+    <string name="plus_license_title">GNU GPL v3 license</string>
+    <string name="plus_notices_title">Third-party notices</string>
+    <string name="plus_upstream_sources_tip">Upstream references only. Obtain the matching Clash Meta Plus source archive from the distributor of this APK.</string>
+    <string name="plus_about_notice">Clash Meta Plus · independent modified version\nGPL v3 · without warranty\nLicense and source information: Help</string>
+</resources>

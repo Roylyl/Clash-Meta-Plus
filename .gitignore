@@ -1,0 +1,75 @@
+# Local Gradle / Kotlin / native build state
+.gradle/
+.kotlin/
+**/build/
+**/.cxx/
+.externalNativeBuild/
+cmake-build-*/
+.gradle-settings-cache/
+.gradletasknamecache
+/core/src/main/cpp/version.h
+
+# IDE state and local machine configuration
+.idea/
+*.iml
+.vscode/
+.fleet/
+/local.properties
+**/local.properties
+/gradle-app.setting
+/captures/
+
+# Signing material and credentials (never publish these)
+**/signing.properties
+*.keystore
+*.jks
+*.p12
+*.pfx
+/*.key
+/*.pem
+/.env
+/.env.*
+!/.env.example
+/secrets/
+/credentials/
+**/google-services.json
+/tracker.properties
+/fastlane/Appfile
+/fastlane/Matchfile
+/fastlane/report.xml
+/fastlane/Preview.html
+
+# Build outputs and local distribution bundles
+*.apk
+*.aab
+*.apks
+*.idsig
+*.hprof
+*.log
+/output/
+/outputs/
+/dist/
+/artifacts/
+/app/foss/release/
+/app/premium/release/
+
+# Generated Geo data; keep source assets and legal notices trackable
+/app/src/main/assets/geoip.metadb
+/app/src/main/assets/geosite.dat
+/app/src/main/assets/ASN.mmdb
+/app/src/main/assets/BundleMRS.7z
+
+# OS/editor temporary files
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+.directory
+*~
+*.swp
+*.swo
+
+# Keep the Gradle wrapper and public source fixtures
+!gradle/wrapper/gradle-wrapper.jar
+# Deliberately no blanket *.pem / *.crt / *.json / *.yaml rule:
+# vendored public test fixtures, CA bundles and source configs are required.

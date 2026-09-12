@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="aggressive_keep_alive_title">Enhanced background keep-alive</string>
+    <string name="aggressive_keep_alive_summary">Keep the CPU awake and avoid screen-off suspension while connected. Takes effect immediately; uses more battery.</string>
+    <string name="battery_optimization_title">Battery optimization</string>
+    <string name="battery_optimization_summary">Allow unrestricted background battery use for more reliable connections. Opens system settings.</string>
+    <string name="battery_optimization_exempt">Battery optimization is already disabled for this app. Tap to review system settings.</string>
+    <string name="always_on_vpn_title">Always-on VPN</string>
+    <string name="always_on_vpn_summary">Open system VPN settings to enable Always-on VPN for Clash Meta. Requires VPN mode.</string>
+    <string name="system_settings_unavailable">System settings could not be opened. Open them manually from your device settings.</string>
+</resources>
