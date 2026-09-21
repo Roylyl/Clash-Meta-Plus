@@ -189,9 +189,21 @@ Alpha 构建任务为 `:app:assembleAlphaRelease`。本文的安装包与外部�
 
 `.gitignore` 排除构建缓存、IDE 本地状态、SDK／Go 路径、签名密钥、私有环境配置、APK 和四个下载生成的 Geo 数据文件。Gradle Wrapper、Go 依赖清单、许可证、声明、公开 CA 文件及内核测试夹具仍应保留。不要用全局 `*.pem`、`*.json` 或 `*.yaml` 规则误删源码所需文件。
 
+提交前按改动范围执行上文对应的构建与验证，并记录实际结果；Python 工具缓存、虚拟环境和 Go 编译出的测试程序也不提交。仓库卫生可独立检查，不需要重新构建 APK：
+
+```sh
+git status --short
+git diff --check
+git diff --cached --stat
+# 不依赖个人全局忽略配置；应显示本仓库中的匹配规则。
+git -c core.excludesFile=/dev/null check-ignore -v .gradle/check app/build/check scripts/__pycache__/package-source.pyc core/src/foss/golang/bridge.test
+# 正常应无输出；如有匹配，先核实规则，不直接删除或取消跟踪文件。
+git -c core.excludesFile=/dev/null ls-files --cached --ignored --exclude-standard
+```
+
 当前工作流仅允许手动触发，使用只读仓库权限，生成验证用 APK、源码归档、构建信息与校验值；不会自动发布 Release、创建标签或更新内核。旧上游工作流以 `.disabled` 文件保存在 `docs/upstream/`，不执行。CI 的临时 artifact 有保留期限，不能当作长期对应源码下载渠道。
 
-正式分发前，应为每个二进制版本保留对应的源码版本与依赖来源，并将可用的本分支源码获取方式提供给接收者。当前仓库尚未配置公开远端地址，README 不提供虚构的下载链接。
+正式分发前，应为每个二进制版本保留对应的源码版本与依赖来源，并将可用的本分支源码获取方式提供给接收者。当前 `origin` 指向 [Roylyl/Clash-Meta-Plus](https://github.com/Roylyl/Clash-Meta-Plus)；分发时仍需确认接收者能访问对应源码版本，远端地址不代表已有可下载的 Release。
 
 ## 外部自动化
 

@@ -9,6 +9,13 @@ cmake-build-*/
 .gradletasknamecache
 /core/src/main/cpp/version.h
 
+# Local Python helpers and Go test executables
+__pycache__/
+*.py[cod]
+.venv/
+/core/src/*/golang/**/*.test
+/core/src/*/golang/**/*.test.exe
+
 # IDE state and local machine configuration
 .idea/
 *.iml
