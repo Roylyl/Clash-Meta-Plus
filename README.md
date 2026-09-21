@@ -1,12 +1,43 @@
-# Clash Meta Plus · 17.01
+<p align="center">
+  <img src="app/src/main/ic_launcher-web.png" width="120" height="120" alt="Clash Meta Plus 应用图标">
+</p>
 
-基于 [Clash Meta for Android](https://github.com/MetaCubeX/ClashMetaForAndroid) 的独立修改分支，提供 Android 网络代理客户端。17.01 调整了后台连接策略、最近任务隐藏和原生界面，并于 2026-09-13 整理为本工程。
+<h1 align="center">Clash Meta Plus</h1>
 
-**本项目不是 MetaCubeX、Clash for Android 原作者或 Apple 的官方产品，与这些项目或公司无官方隶属、赞助或背书关系。** 原有源码、图标及第三方作品的版权归各自权利人所有。整体派生程序继续按 [GNU GPL v3](LICENSE) 分发，独立第三方材料遵循各自许可；本分支的具体修改见 [CHANGELOG](CHANGELOG.md)，来源记录见 [UPSTREAM](docs/UPSTREAM.md)。
+<p align="center">
+  基于 Clash Meta for Android 的独立 Android 网络代理客户端修改分支。
+</p>
+
+<p align="center">
+  <a href="https://github.com/Roylyl/Clash-Meta-Plus/releases"><img alt="GitHub Release" src="https://img.shields.io/github/v/release/Roylyl/Clash-Meta-Plus?display_name=tag&amp;include_prereleases&amp;sort=semver"></a>
+  <a href="https://github.com/Roylyl/Clash-Meta-Plus/releases"><img alt="GitHub Release Downloads" src="https://img.shields.io/github/downloads/Roylyl/Clash-Meta-Plus/total"></a>
+  <a href="https://github.com/Roylyl/Clash-Meta-Plus/stargazers"><img alt="GitHub Stars" src="https://img.shields.io/github/stars/Roylyl/Clash-Meta-Plus?style=flat"></a>
+  <a href="https://github.com/Roylyl/Clash-Meta-Plus/commits/main"><img alt="GitHub Last Commit" src="https://img.shields.io/github/last-commit/Roylyl/Clash-Meta-Plus"></a>
+  <a href="LICENSE"><img alt="License" src="https://img.shields.io/github/license/Roylyl/Clash-Meta-Plus"></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/Roylyl/Clash-Meta-Plus/releases">下载与发布</a> ·
+  <a href="#快速上手">快速上手</a> ·
+  <a href="#界面预览">界面预览</a> ·
+  <a href="#从源码构建">构建</a> ·
+  <a href="CHANGELOG.md">修改记录</a>
+</p>
+
+> [!IMPORTANT]
+> 本项目不是 MetaCubeX、Clash for Android 原作者或 Apple 的官方产品，与这些项目或公司无官方隶属、赞助或背书关系。原有源码、图标及第三方作品的版权归各自权利人所有。
+
+## 项目概览
+
+Clash Meta Plus 17.01 在 [Clash Meta for Android](https://github.com/MetaCubeX/ClashMetaForAndroid) 工程基础上调整后台连接策略、最近任务隐藏和原生界面，并于 2026-09-13 整理为本工程。项目使用 Mihomo 内核，要求用户自行提供合法、获授权的配置或订阅；仓库不提供节点、订阅、账户或网络接入服务。
+
+整体派生程序继续按 [GNU GPL v3](LICENSE) 分发，独立第三方材料遵循各自许可。本分支的具体修改见 [CHANGELOG](CHANGELOG.md)，来源记录见 [UPSTREAM](docs/UPSTREAM.md)。GitHub Releases 中是否存在可直接安装的 APK，以发布页实际附件为准；仓库不把标签、CI artifact 或版本号等同于已发布安装包。
 
 **增强后台保活 · 最近任务隐藏 · 浅色／深色主题 · Mihomo 内核**
 
-[快速上手](#快速上手) · [界面预览](#界面预览) · [从源码构建](#从源码构建) · [外部自动化](#外部自动化) · [常见问题](#常见问题) · [许可与分发](#许可与分发)
+### 导航
+
+[核心功能](#核心功能) · [快速上手](#快速上手) · [界面预览](#界面预览) · [从源码构建](#从源码构建) · [外部自动化](#外部自动化) · [隐私安全与使用边界](#隐私安全与使用边界) · [许可与分发](#许可与分发)
 
 | 项目 | 当前配置 |
 | --- | --- |
@@ -17,7 +48,9 @@
 | 已验证安装包 | `arm64-v8a` Meta Release |
 | 源码支持架构 | `arm64-v8a`、`armeabi-v7a`、`x86`、`x86_64` |
 
-## 17.01 的主要变化
+## 核心功能
+
+以下功能是 17.01 相对所接收上游源码的主要变化；完整范围与日期以 [CHANGELOG](CHANGELOG.md) 和 [修改文件清单](docs/MODIFIED_FILES.md) 为准。
 
 ### 增强后台保活
 
@@ -62,7 +95,7 @@
 
 | 浅色主题 | 深色主题 |
 | --- | --- |
-| ![浅色主题首页](docs/images/home-light.png) | ![深色主题首页](docs/images/home-dark.png) |
+| <img src="docs/images/home-light.png" width="280" alt="浅色主题首页"> | <img src="docs/images/home-dark.png" width="280" alt="深色主题首页"> |
 
 ## 从源码构建
 
@@ -248,7 +281,9 @@ clashmeta://install-config?url=<URL编码后的配置地址>
 | 隐藏最近任务后仍有通知 | 这是预期行为：开关隐藏多任务卡片，VPN 前台运行通知继续保留。 |
 | 从源码 ZIP 构建后内核版本含 `unknown` | ZIP 没有 Git 元数据，CMake 使用版本占位值；应用版本仍为 `17.01`。 |
 
-## 验证范围
+## 项目状态与验证范围
+
+本仓库是独立维护的修改分支，不是上游官方发布渠道。当前源码版本、工具链和已完成验证如下所述；这些记录只对应文档注明的环境，不构成对所有设备、系统版本、配置或网络环境的兼容性承诺。
 
 - Debug Kotlin、Data Binding 和资源链接检查通过。
 - ARM64 Meta Release 构建通过，包含 R8、资源压缩及 Release Lint Vital；APK 的签名与 16 KB 对齐检查通过。
@@ -257,6 +292,15 @@ clashmeta://install-config?url=<URL编码后的配置地址>
 - 在不含 Go 的精简 `PATH`、未设置外部 `GOROOT` 的环境下，强制重新编译 ARM64 内核及完整 Release 构建通过。
 
 上述结果不代表所有 Android 版本、所有架构或所有厂商手机均已完成实机验证；长时间后台存活仍需在目标设备上观察。
+
+## 隐私、安全与使用边界
+
+- 应用处理的配置、订阅、DNS 和代理流量会按用户所选配置连接相应第三方服务器；这些服务可能接收 IP 地址、请求内容和协议所需数据。客户端开源不等同于第三方服务可信。
+- 日志、导出配置和故障信息可能包含服务器地址、订阅凭据、私钥或可识别的网络信息。公开 Issue、截图或构建日志前应先脱敏。
+- 本仓库不提供节点、订阅或绕过网络管理的服务，也不保证任何配置的合法性、可用性或安全性。请仅在适用法律法规、网络服务条款以及所在组织政策允许的范围内使用，并自行确认配置来源获得授权。
+- 增强后台保活会提高资源与电量消耗；VPN、前台服务、开机恢复和应用列表访问仍受 Android 权限及系统策略控制。
+
+可核实的数据处理路径、核查范围和分发者责任见 [PRIVACY_POLICY.md](PRIVACY_POLICY.md)。安全问题报告中不要提交真实订阅、密钥、完整配置或未经脱敏的日志。
 
 ## 项目结构
 
@@ -270,6 +314,16 @@ hideapi/   Android 隐藏 API 编译接口
 docs/      README 界面截图
 .github/   构建工作流与 Go 运行时补丁
 ```
+
+## 参与贡献
+
+欢迎提交范围清晰、可复现且附带验证说明的问题与改进。开始前请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)，并在 Issue 或 Pull Request 中说明：
+
+- 变更动机、影响模块和对应的上游／本分支背景；
+- 实际执行的构建、Lint、设备或模拟器验证；
+- 是否改变权限、配置格式、网络行为、签名、第三方依赖或分发义务。
+
+涉及 Mihomo 内核、VPN 行为、后台恢复、签名或第三方数据分发的较大修改，应先讨论范围。提交者应理解并核验所提交的代码，不要把未经验证的批量生成内容、密钥、订阅或构建产物加入仓库。
 
 ## 许可与分发
 
