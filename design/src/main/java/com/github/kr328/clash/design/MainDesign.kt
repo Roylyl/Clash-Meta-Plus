@@ -15,6 +15,7 @@ import kotlinx.coroutines.withContext
 class MainDesign(context: Context) : Design<MainDesign.Request>(context) {
     enum class Request {
         ToggleStatus,
+        OpenLanSharing,
         OpenProxy,
         OpenProfiles,
         OpenProviders,

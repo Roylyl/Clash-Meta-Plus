@@ -19,7 +19,10 @@ import kotlin.coroutines.resume
 
 class OverrideSettingsDesign(
     context: Context,
-    configuration: ConfigurationOverride
+    configuration: ConfigurationOverride,
+    lanOnly: Boolean = false,
+    effective: com.github.kr328.clash.core.model.UiConfiguration = com.github.kr328.clash.core.model.UiConfiguration(),
+    addresses: List<String> = emptyList()
 ) : Design<OverrideSettingsDesign.Request>(context) {
     enum class Request {
         ResetOverride
@@ -53,6 +56,7 @@ class OverrideSettingsDesign(
 
     init {
         binding.self = this
+        if (lanOnly) binding.clearView.visibility = View.GONE
 
         binding.activityBarLayout.applyFrom(context)
 
@@ -70,6 +74,56 @@ class OverrideSettingsDesign(
         )
 
         val screen = preferenceScreen(context) {
+            if (lanOnly) {
+                category(R.string.lan_sharing)
+                val connection = clickable(title = R.string.lan_connection_details)
+                fun updateConnection() {
+                    val mixed = configuration.mixedPort ?: effective.mixedPort
+                    val http = configuration.httpPort ?: effective.httpPort
+                    val socks = configuration.socksPort ?: effective.socksPort
+                    val disabled = context.getString(R.string.disabled)
+                    connection.summary = context.getString(
+                        R.string.lan_connection_values,
+                        addresses.joinToString("\n").ifEmpty { context.getString(R.string.lan_no_address) },
+                        (if (mixed > 0) mixed else http).takeIf { it > 0 }?.toString() ?: disabled,
+                        (if (mixed > 0) mixed else socks).takeIf { it > 0 }?.toString() ?: disabled,
+                    )
+                }
+                updateConnection()
+                clickable(
+                    title = R.string.lan_sharing_help,
+                    summary = R.string.lan_sharing_instructions,
+                )
+                selectableList(
+                    value = configuration::allowLan,
+                    values = booleanValues,
+                    valuesText = booleanValuesText,
+                    title = R.string.allow_lan,
+                )
+                editableText(
+                    value = configuration::mixedPort,
+                    adapter = NullableTextAdapter.Port,
+                    title = R.string.mixed_port,
+                    onChanged = { updateConnection() },
+                    placeholder = R.string.dont_modify,
+                    empty = R.string.disabled,
+                )
+                editableText(
+                    value = configuration::bindAddress,
+                    adapter = NullableTextAdapter.String,
+                    title = R.string.bind_address,
+                    placeholder = R.string.dont_modify,
+                    empty = R.string.default_,
+                )
+                editableTextList(
+                    value = configuration::authentication,
+                    adapter = TextAdapter.String,
+                    title = R.string.authentication,
+                    placeholder = R.string.dont_modify,
+                )
+                return@preferenceScreen
+            }
+
             category(R.string.general)
 
             editableText(

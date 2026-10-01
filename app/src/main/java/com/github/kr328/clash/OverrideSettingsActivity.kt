@@ -15,9 +15,27 @@ import kotlinx.coroutines.selects.select
 import kotlinx.coroutines.withContext
 
 class OverrideSettingsActivity : BaseActivity<OverrideSettingsDesign>() {
+    companion object {
+        const val EXTRA_LAN_ONLY = "lan_only"
+    }
+
     override suspend fun main() {
+        val lanOnly = intent.getBooleanExtra(EXTRA_LAN_ONLY, false)
+        if (lanOnly) setTitle(com.github.kr328.clash.design.R.string.lan_sharing)
+
         val configuration = withClash { queryOverride(Clash.OverrideSlot.Persist) }
-        val service = ServiceStore(this)
+        val effective = withClash { queryConfiguration() }
+        val addresses = withContext(Dispatchers.IO) {
+            java.net.NetworkInterface.getNetworkInterfaces().toList()
+                .filter { it.isUp && !it.isLoopback &&
+                    !it.name.startsWith("tun") && !it.name.startsWith("rmnet") &&
+                    !it.name.startsWith("ccmni") }
+                .flatMap { network -> network.inetAddresses.toList()
+                    .filterIsInstance<java.net.Inet4Address>()
+                    .filter { it.isSiteLocalAddress }
+                    .mapNotNull { it.hostAddress } }
+                .distinct()
+        }
 
         defer {
             withClash {
@@ -27,7 +45,10 @@ class OverrideSettingsActivity : BaseActivity<OverrideSettingsDesign>() {
 
         val design = OverrideSettingsDesign(
             this,
-            configuration
+            configuration,
+            lanOnly,
+            effective,
+            addresses
         )
 
         setContentDesign(design)

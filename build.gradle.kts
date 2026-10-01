@@ -58,8 +58,9 @@ subprojects {
             minSdk = 21
             targetSdk = 35
 
-            versionName = "17.01"
-            versionCode = 1701000
+            // Keep the user-facing version fixed; versionCode is the upgrade counter.
+            versionName = "170.1"
+            versionCode = 1703000
 
             resValue("string", "release_name", "v$versionName")
             resValue("integer", "release_code", "$versionCode")
@@ -99,7 +100,6 @@ subprojects {
             val removeSuffix = (queryConfigProperty("remove.suffix") as? String)?.toBoolean() == true
 
             create("alpha") {
-                isDefault = true
                 dimension = flavorDimensionList[0]
 
 
@@ -114,6 +114,7 @@ subprojects {
             }
 
             create("meta") {
+                isDefault = true
 
                 dimension = flavorDimensionList[0]
 

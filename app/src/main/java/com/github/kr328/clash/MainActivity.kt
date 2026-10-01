@@ -58,6 +58,10 @@ class MainActivity : BaseActivity<MainDesign>() {
                             else
                                 design.startClash()
                         }
+                        MainDesign.Request.OpenLanSharing ->
+                            startActivity(OverrideSettingsActivity::class.intent.putExtra(
+                                OverrideSettingsActivity.EXTRA_LAN_ONLY, true
+                            ))
                         MainDesign.Request.OpenProxy ->
                             startActivity(ProxyActivity::class.intent)
                         MainDesign.Request.OpenProfiles ->

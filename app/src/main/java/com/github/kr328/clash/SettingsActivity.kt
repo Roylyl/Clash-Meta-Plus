@@ -18,6 +18,12 @@ class SettingsActivity : BaseActivity<SettingsDesign>() {
                 }
                 design.requests.onReceive {
                     when (it) {
+                        SettingsDesign.Request.OpenLogs ->
+                            startActivity(if (LogcatService.running)
+                                LogcatActivity::class.intent else LogsActivity::class.intent)
+                        SettingsDesign.Request.OpenAbout ->
+                            design.showAbout(packageManager.getPackageInfo(packageName, 0).versionName +
+                                "\n" + com.github.kr328.clash.core.bridge.Bridge.nativeCoreVersion().replace("_", "-"))
                         SettingsDesign.Request.StartApp ->
                             startActivity(AppSettingsActivity::class.intent)
                         SettingsDesign.Request.StartNetwork ->

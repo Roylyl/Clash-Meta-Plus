@@ -4,9 +4,16 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.github.kr328.clash.core.util.Parcelizer
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.SerialName
 
 @Serializable
-class UiConfiguration : Parcelable {
+class UiConfiguration(
+    @SerialName("mixed-port") val mixedPort: Int = 0,
+    @SerialName("port") val httpPort: Int = 0,
+    @SerialName("socks-port") val socksPort: Int = 0,
+    @SerialName("allow-lan") val allowLan: Boolean = false,
+    @SerialName("bind-address") val bindAddress: String = "",
+) : Parcelable {
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         Parcelizer.encodeToParcel(serializer(), parcel, this)
     }

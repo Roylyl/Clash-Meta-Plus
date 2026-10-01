@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="lan_sharing">LAN sharing</string>
+    <string name="lan_sharing_summary">Devices must configure a proxy manually</string>
+    <string name="lan_sharing_help">Setup instructions</string>
+    <string name="lan_sharing_instructions">Enable Allow LAN, set a mixed port (for example 7890), and use 0.0.0.0 as the bind address. On the connected device, configure an HTTP or SOCKS proxy using this phone’s hotspot or LAN IP address and that port. Start Clash and select Rule or Global mode. Only traffic sent to the proxy follows that mode. Changes apply after leaving this page. Authentication uses username:password entries.</string>
+    <string name="lan_connection_details">Proxy settings for the other device</string>
+    <string name="lan_connection_values">IP address:\n%1$s\nHTTP port: %2$s\nSOCKS port: %3$s\nChoose the IP for the network shared with the other device. Port edits apply after leaving this page.</string>
+    <string name="lan_no_address">No LAN address found. Enable the hotspot or connect to Wi-Fi, then reopen this page.</string>
+</resources>

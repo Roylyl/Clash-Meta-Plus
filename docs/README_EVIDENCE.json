@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "claims": [
+    {
+      "id": "version",
+      "quote": "固定为170.1，后续功能更新保持不变",
+      "level": "configuration",
+      "reasoning": "限定为源码配置、实现或注明设备的本次观察。",
+      "evidence": [
+        {
+          "path": "build.gradle.kts",
+          "excerpt": "versionName = \"170.1\""
+        }
+      ]
+    },
+    {
+      "id": "meta",
+      "quote": "默认变体已设为Meta。",
+      "level": "configuration",
+      "reasoning": "限定为源码配置、实现或注明设备的本次观察。",
+      "evidence": [
+        {
+          "path": "build.gradle.kts",
+          "excerpt": "create(\"meta\") {\n                isDefault = true"
+        }
+      ]
+    },
+    {
+      "id": "ip",
+      "quote": "IP列表排除VPN虚拟接口和移动网络接口。",
+      "level": "implementation",
+      "reasoning": "限定为源码配置、实现或注明设备的本次观察。",
+      "evidence": [
+        {
+          "path": "app/src/main/java/com/github/kr328/clash/OverrideSettingsActivity.kt",
+          "excerpt": "!it.name.startsWith(\"ccmni\")"
+        }
+      ]
+    },
+    {
+      "id": "port",
+      "quote": "修改复合端口时，页面上的端口信息同步更新",
+      "level": "implementation",
+      "reasoning": "限定为源码配置、实现或注明设备的本次观察。",
+      "evidence": [
+        {
+          "path": "design/src/main/java/com/github/kr328/clash/design/OverrideSettingsDesign.kt",
+          "excerpt": "onChanged = { updateConnection() }"
+        }
+      ]
+    },
+    {
+      "id": "device",
+      "quote": "通过USB覆盖安装显示版本170.1。",
+      "level": "device",
+      "reasoning": "限定为源码配置、实现或注明设备的本次观察。",
+      "evidence": [
+        {
+          "path": "docs/README_VERIFICATION.md",
+          "excerpt": "170.1安装后包管理器显示versionName=170.1、versionCode=1703000。"
+        }
+      ]
+    }
+  ]
+}

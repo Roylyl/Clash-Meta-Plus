@@ -10,6 +10,7 @@ import (
 	"cfa/native/app"
 
 	"github.com/metacubex/mihomo/log"
+	"github.com/metacubex/mihomo/hub/executor"
 )
 
 func openRemoteContent(url string) (int, error) {
@@ -51,7 +52,14 @@ func notifyTimeZoneChanged(name C.c_string, offset C.int) {
 
 //export queryConfiguration
 func queryConfiguration() *C.char {
-	response := &struct{}{}
+	general := executor.GetGeneral()
+	response := &struct {
+		MixedPort int `json:"mixed-port"`
+		HttpPort int `json:"port"`
+		SocksPort int `json:"socks-port"`
+		AllowLan bool `json:"allow-lan"`
+		BindAddress string `json:"bind-address"`
+	}{general.MixedPort, general.Port, general.SocksPort, general.AllowLan, general.BindAddress}
 
 	return marshalJson(&response)
 }
