@@ -1,12 +1,28 @@
 <p align="center">
-  <img src="app/src/main/ic_launcher-web.png" width="100" height="100" alt="Clash Meta Plus应用图标">
+  <img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" width="120" alt="Clash Meta Plus实际应用图标">
 </p>
 
-# Clash Meta Plus
+<h1 align="center">Clash Meta Plus</h1>
 
-基于Clash Meta for Android的Android网络代理客户端修改分支，使用Mihomo内核，围绕网络管理、局域网共享、日志、后台保活和界面设置提供日常使用入口。
+<p align="center">
+  基于Clash Meta for Android的Android网络代理客户端修改分支，使用Mihomo内核，提供网络管理、局域网共享、日志、后台保活和界面设置。
+</p>
 
-[开始使用](#开始使用) · [局域网共享](#局域网共享) · [覆盖安装](#覆盖安装与数据保留) · [源码构建](#从源码构建) · [验证范围](#验证范围) · [许可](#许可与来源)
+<p align="center">
+  <a href="build.gradle.kts"><img src="https://img.shields.io/badge/version-170.1-3276B9?style=flat-square" alt="版本170.1"></a>
+  <a href="#开始使用"><img src="https://img.shields.io/badge/platform-Android%205.0%2B-3276B9?style=flat-square" alt="最低系统配置Android5.0"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPLv3-555555?style=flat-square" alt="GPLv3许可证"></a>
+  <a href="https://github.com/Roylyl/Clash-Meta-Plus"><img src="https://img.shields.io/badge/source-GitHub-555555?style=flat-square" alt="GitHub源码仓库"></a>
+</p>
+
+<p align="center">
+  <a href="#开始使用">开始使用</a> ·
+  <a href="#局域网共享">局域网共享</a> ·
+  <a href="#覆盖安装与数据保留">覆盖安装</a> ·
+  <a href="#从源码构建">源码构建</a> ·
+  <a href="#验证范围">验证范围</a> ·
+  <a href="#许可与来源">许可</a>
+</p>
 
 ## 项目状态
 
