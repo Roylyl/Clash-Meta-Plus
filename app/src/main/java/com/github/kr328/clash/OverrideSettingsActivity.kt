@@ -1,13 +1,8 @@
 package com.github.kr328.clash
 
-import android.content.pm.PackageManager
-import com.github.kr328.clash.common.compat.getDrawableCompat
-import com.github.kr328.clash.common.constants.Metadata
 import com.github.kr328.clash.core.Clash
+import com.github.kr328.clash.core.model.pinLanSharing
 import com.github.kr328.clash.design.OverrideSettingsDesign
-import com.github.kr328.clash.design.model.AppInfo
-import com.github.kr328.clash.design.util.toAppInfo
-import com.github.kr328.clash.service.store.ServiceStore
 import com.github.kr328.clash.util.withClash
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.isActive
@@ -25,6 +20,7 @@ class OverrideSettingsActivity : BaseActivity<OverrideSettingsDesign>() {
 
         val configuration = withClash { queryOverride(Clash.OverrideSlot.Persist) }
         val effective = withClash { queryConfiguration() }
+        if (lanOnly) configuration.pinLanSharing(effective)
         val addresses = withContext(Dispatchers.IO) {
             java.net.NetworkInterface.getNetworkInterfaces().toList()
                 .filter { it.isUp && !it.isLoopback &&
@@ -77,3 +73,4 @@ class OverrideSettingsActivity : BaseActivity<OverrideSettingsDesign>() {
         }
     }
 }
+

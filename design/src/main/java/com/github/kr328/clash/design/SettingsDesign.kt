@@ -29,11 +29,14 @@ class SettingsDesign(context: Context) : Design<SettingsDesign.Request>(context)
         binding.scrollRoot.bindAppBarElevation(binding.activityBarLayout)
     }
 
-    fun showAbout(versionName: String) {
+    fun showAbout(versionName: String, checkForUpdates: () -> Unit) {
         val about = DesignAboutBinding.inflate(context.layoutInflater).apply {
             this.versionName = versionName
         }
-        AlertDialog.Builder(context).setView(about.root).show()
+        AlertDialog.Builder(context).setView(about.root)
+            .setPositiveButton(R.string.check_for_updates) { _, _ -> checkForUpdates() }
+            .setNegativeButton(R.string.close, null)
+            .show()
     }
 
     fun request(request: Request) {

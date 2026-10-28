@@ -49,13 +49,13 @@
 
                     <ImageView
                         android:id="@+id/update_view"
-                        android:layout_width="@dimen/item_tailing_component_size"
-                        android:layout_height="@dimen/item_tailing_component_size"
+                        android:layout_width="@dimen/toolbar_image_action_size"
+                        android:layout_height="@dimen/toolbar_image_action_size"
                         android:layout_gravity="end|center_vertical"
                         android:layout_marginStart="@dimen/item_tailing_margin"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:clickable="true"
-                        android:contentDescription="@string/_new"
+                        android:contentDescription="@string/update_all"
                         android:focusable="true"
                         android:onClick="@{() -> self.requestUpdateAll()}"
                         android:padding="@dimen/toolbar_image_action_padding"
@@ -65,8 +65,8 @@
 
                 <ImageView
                     android:id="@+id/add_view"
-                    android:layout_width="@dimen/item_tailing_component_size"
-                    android:layout_height="@dimen/item_tailing_component_size"
+                    android:layout_width="@dimen/toolbar_image_action_size"
+                    android:layout_height="@dimen/toolbar_image_action_size"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="end|center_vertical"

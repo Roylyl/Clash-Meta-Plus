@@ -58,8 +58,8 @@
                         android:visibility="@{streaming ? View.GONE : View.VISIBLE}">
 
                         <ImageView
-                            android:layout_width="@dimen/item_tailing_component_size"
-                            android:layout_height="@dimen/item_tailing_component_size"
+                            android:layout_width="@dimen/toolbar_image_action_size"
+                            android:layout_height="@dimen/toolbar_image_action_size"
                             android:layout_marginStart="@dimen/item_tailing_margin"
                             android:background="?selectableItemBackgroundBorderless"
                             android:clickable="true"
@@ -70,8 +70,8 @@
                             android:src="@drawable/ic_baseline_delete" />
 
                         <ImageView
-                            android:layout_width="@dimen/item_tailing_component_size"
-                            android:layout_height="@dimen/item_tailing_component_size"
+                            android:layout_width="@dimen/toolbar_image_action_size"
+                            android:layout_height="@dimen/toolbar_image_action_size"
                             android:layout_marginStart="@dimen/item_tailing_margin"
                             android:background="?selectableItemBackgroundBorderless"
                             android:clickable="true"
@@ -83,8 +83,8 @@
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="@dimen/item_tailing_component_size"
-                        android:layout_height="@dimen/item_tailing_component_size"
+                        android:layout_width="@dimen/toolbar_image_action_size"
+                        android:layout_height="@dimen/toolbar_image_action_size"
                         android:layout_gravity="end"
                         android:layout_marginStart="@dimen/item_tailing_margin"
                         android:background="?selectableItemBackgroundBorderless"

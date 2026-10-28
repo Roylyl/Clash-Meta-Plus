@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="update_title">App updates</string>
+    <string name="update_current">Installed version: %1$s</string>
+    <string name="update_checking">Checking releases…</string>
+    <string name="update_latest">No newer release with a compatible APK was found.</string>
+    <string name="update_available">New version: %1$s</string>
+    <string name="update_notification_body">Tap to view the release and download it in the app.</string>
+    <string name="update_download">Download update</string>
+    <string name="update_download_complete">Update downloaded</string>
+    <string name="update_install_notification">Tap to open the installer.</string>
+    <string name="update_downloading">Downloading %1$s: %2$d%%</string>
+    <string name="update_download_waiting">Waiting for the download…</string>
+    <string name="update_download_failed">Download failed. Tap Check for updates to try again.</string>
+    <string name="update_check_failed">Unable to check for updates. Check your connection and try again.</string>
+    <string name="update_install">Install update</string>
+    <string name="update_install_permission">Allow this app to install updates in the next system screen. Installation still requires your confirmation.</string>
+    <string name="update_install_failed">Unable to open the installer: %1$s</string>
+    <string name="update_schedule_help">Checks run on launch and every 3 hours in the background. Battery restrictions may delay background checks.</string>
+    <string name="update_asset">APK: %1$s</string>
+    <string name="update_cancel_download">Cancel download</string>
+</resources>

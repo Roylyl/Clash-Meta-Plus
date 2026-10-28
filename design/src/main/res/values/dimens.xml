@@ -15,6 +15,7 @@
     <dimen name="toolbar_height">68dp</dimen>
     <dimen name="toolbar_elevation">2dp</dimen>
     <dimen name="toolbar_image_action_padding">12dp</dimen>
+    <dimen name="toolbar_image_action_size">52dp</dimen>
 
     <!--  Tab Layout  -->
     <dimen name="tab_layout_height">48dp</dimen>

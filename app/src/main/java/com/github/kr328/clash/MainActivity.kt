@@ -4,10 +4,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
@@ -22,6 +20,8 @@ import com.github.kr328.clash.util.stopClashService
 import com.github.kr328.clash.util.withClash
 import com.github.kr328.clash.util.withProfile
 import com.github.kr328.clash.core.bridge.*
+import com.github.kr328.clash.update.UpdateActivity
+import com.github.kr328.clash.update.UpdateScheduler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.selects.select
@@ -80,7 +80,9 @@ class MainActivity : BaseActivity<MainDesign>() {
                         MainDesign.Request.OpenHelp ->
                             startActivity(HelpActivity::class.intent)
                         MainDesign.Request.OpenAbout ->
-                            design.showAbout(queryAppVersionName())
+                            design.showAbout(queryAppVersionName()) {
+                                startActivity(Intent(this@MainActivity, UpdateActivity::class.java))
+                            }
                     }
                 }
                 if (clashRunning) {
@@ -90,6 +92,11 @@ class MainActivity : BaseActivity<MainDesign>() {
                 }
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        UpdateScheduler.checkOnLaunch(this)
     }
 
     private suspend fun MainDesign.fetch() {

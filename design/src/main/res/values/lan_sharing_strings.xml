@@ -3,8 +3,10 @@
     <string name="lan_sharing">LAN sharing</string>
     <string name="lan_sharing_summary">Devices must configure a proxy manually</string>
     <string name="lan_sharing_help">Setup instructions</string>
-    <string name="lan_sharing_instructions">Enable Allow LAN, set a mixed port (for example 7890), and use 0.0.0.0 as the bind address. On the connected device, configure an HTTP or SOCKS proxy using this phone’s hotspot or LAN IP address and that port. Start Clash and select Rule or Global mode. Only traffic sent to the proxy follows that mode. Changes apply after leaving this page. Authentication uses username:password entries.</string>
+    <string name="lan_sharing_instructions">Enable Allow LAN, set a fixed sharing port (for example 7890), and use 0.0.0.0 as the bind address. The current port is kept on first entry, or 7890 is used if no port is available. Leave this page to save; switching or updating profiles will then keep the sharing port. On the connected device, configure an HTTP or SOCKS proxy using this phone’s hotspot or LAN IP address and the fixed port. The phone’s system assigns the hotspot IP; the bind address cannot pin it. Start Clash and select Rule or Global mode. Only traffic sent to the proxy follows that mode. Authentication uses username:password entries.</string>
+    <string name="lan_fixed_port">Fixed sharing port (HTTP/SOCKS)</string>
+    <string name="lan_invalid_port">Enter a port number from 1 to 65535</string>
     <string name="lan_connection_details">Proxy settings for the other device</string>
-    <string name="lan_connection_values">IP address:\n%1$s\nHTTP port: %2$s\nSOCKS port: %3$s\nChoose the IP for the network shared with the other device. Port edits apply after leaving this page.</string>
+    <string name="lan_connection_values">IP address:\n%1$s\nHTTP port: %2$s\nSOCKS port: %3$s\nChoose the IP for the network shared with the other device. Leave this page to save the ports independently of profiles.</string>
     <string name="lan_no_address">No LAN address found. Enable the hotspot or connect to Wi-Fi, then reopen this page.</string>
 </resources>

@@ -5,16 +5,15 @@ import android.view.View
 import com.github.kr328.clash.core.model.ConfigurationOverride
 import com.github.kr328.clash.core.model.LogMessage
 import com.github.kr328.clash.core.model.TunnelState
+import com.github.kr328.clash.core.model.pinLanSharing
 import com.github.kr328.clash.design.databinding.DesignSettingsOverideBinding
-import com.github.kr328.clash.design.databinding.DialogPreferenceListBinding
 import com.github.kr328.clash.design.dialog.FullScreenDialog
-import com.github.kr328.clash.design.model.AppInfo
+import com.github.kr328.clash.design.dialog.requestModelTextInput
 import com.github.kr328.clash.design.preference.*
 import com.github.kr328.clash.design.util.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlinx.coroutines.withContext
 import kotlin.coroutines.resume
 
 class OverrideSettingsDesign(
@@ -77,6 +76,17 @@ class OverrideSettingsDesign(
             if (lanOnly) {
                 category(R.string.lan_sharing)
                 val connection = clickable(title = R.string.lan_connection_details)
+                clickable(
+                    title = R.string.lan_sharing_help,
+                    summary = R.string.lan_sharing_instructions,
+                )
+                selectableList(
+                    value = configuration::allowLan,
+                    values = arrayOf<Boolean?>(true, false),
+                    valuesText = arrayOf(R.string.enabled, R.string.disabled),
+                    title = R.string.allow_lan,
+                )
+                val port = clickable(title = R.string.lan_fixed_port)
                 fun updateConnection() {
                     val mixed = configuration.mixedPort ?: effective.mixedPort
                     val http = configuration.httpPort ?: effective.httpPort
@@ -88,29 +98,28 @@ class OverrideSettingsDesign(
                         (if (mixed > 0) mixed else http).takeIf { it > 0 }?.toString() ?: disabled,
                         (if (mixed > 0) mixed else socks).takeIf { it > 0 }?.toString() ?: disabled,
                     )
+                    port.summary = mixed.toString()
                 }
                 updateConnection()
-                clickable(
-                    title = R.string.lan_sharing_help,
-                    summary = R.string.lan_sharing_instructions,
-                )
-                selectableList(
-                    value = configuration::allowLan,
-                    values = booleanValues,
-                    valuesText = booleanValuesText,
-                    title = R.string.allow_lan,
-                )
-                editableText(
-                    value = configuration::mixedPort,
-                    adapter = NullableTextAdapter.Port,
-                    title = R.string.mixed_port,
-                    onChanged = { updateConnection() },
-                    placeholder = R.string.dont_modify,
-                    empty = R.string.disabled,
-                )
+                port.clicked {
+                    launch {
+                        val value = context.requestModelTextInput(
+                            initial = configuration.mixedPort.toString(),
+                            title = context.getText(R.string.lan_fixed_port),
+                            error = context.getText(R.string.lan_invalid_port),
+                            validator = { it.toIntOrNull() in 1..65535 },
+                        )
+                        configuration.mixedPort = value.toInt()
+                        configuration.pinLanSharing(effective)
+                        updateConnection()
+                    }
+                }
                 editableText(
                     value = configuration::bindAddress,
-                    adapter = NullableTextAdapter.String,
+                    adapter = object : NullableTextAdapter<String?> {
+                        override fun from(value: String?) = value
+                        override fun to(text: String?) = text?.takeIf { it.isNotBlank() } ?: "0.0.0.0"
+                    },
                     title = R.string.bind_address,
                     placeholder = R.string.dont_modify,
                     empty = R.string.default_,

@@ -1,5 +1,7 @@
 package com.github.kr328.clash
 
+import android.content.Intent
+import com.github.kr328.clash.update.UpdateActivity
 import com.github.kr328.clash.common.util.intent
 import com.github.kr328.clash.design.SettingsDesign
 import kotlinx.coroutines.isActive
@@ -23,7 +25,9 @@ class SettingsActivity : BaseActivity<SettingsDesign>() {
                                 LogcatActivity::class.intent else LogsActivity::class.intent)
                         SettingsDesign.Request.OpenAbout ->
                             design.showAbout(packageManager.getPackageInfo(packageName, 0).versionName +
-                                "\n" + com.github.kr328.clash.core.bridge.Bridge.nativeCoreVersion().replace("_", "-"))
+                                "\n" + com.github.kr328.clash.core.bridge.Bridge.nativeCoreVersion().replace("_", "-")) {
+                                startActivity(Intent(this@SettingsActivity, UpdateActivity::class.java))
+                            }
                         SettingsDesign.Request.StartApp ->
                             startActivity(AppSettingsActivity::class.intent)
                         SettingsDesign.Request.StartNetwork ->

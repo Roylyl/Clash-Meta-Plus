@@ -58,11 +58,11 @@ subprojects {
             minSdk = 21
             targetSdk = 35
 
-            // Keep the user-facing version fixed; versionCode is the upgrade counter.
-            versionName = "170.1"
-            versionCode = 1703000
+            // versionCode must increase for every distributed APK.
+            versionName = "1.0.0"
+            versionCode = 1704001
 
-            resValue("string", "release_name", "v$versionName")
+            resValue("string", "release_name", "$versionName")
             resValue("integer", "release_code", "$versionCode")
 
             ndk {

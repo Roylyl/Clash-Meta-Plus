@@ -66,7 +66,7 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) {
         }
     }
 
-    suspend fun showAbout(versionName: String) {
+    suspend fun showAbout(versionName: String, checkForUpdates: () -> Unit) {
         withContext(Dispatchers.Main) {
             val binding = DesignAboutBinding.inflate(context.layoutInflater).apply {
                 this.versionName = versionName
@@ -74,6 +74,8 @@ class MainDesign(context: Context) : Design<MainDesign.Request>(context) {
 
             AlertDialog.Builder(context)
                 .setView(binding.root)
+                .setPositiveButton(R.string.check_for_updates) { _, _ -> checkForUpdates() }
+                .setNegativeButton(R.string.close, null)
                 .show()
         }
     }

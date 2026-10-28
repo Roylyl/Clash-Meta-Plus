@@ -3,8 +3,10 @@
     <string name="lan_sharing">局域网共享</string>
     <string name="lan_sharing_summary">连接设备需手动配置代理</string>
     <string name="lan_sharing_help">使用说明</string>
-    <string name="lan_sharing_instructions">启用“允许来自局域网的连接”，设置复合端口（例如7890），监听地址填写0.0.0.0。在连接设备上，将HTTP或SOCKS代理地址设为本机的热点或局域网IP，端口使用上述复合端口。启动Clash并选择规则或全局模式，发送到代理的流量会跟随该模式。返回上一页后保存并应用设置。身份验证使用用户名:密码格式。</string>
+    <string name="lan_sharing_instructions">启用“允许来自局域网的连接”，设置固定共享端口（例如7890），监听地址填写0.0.0.0。首次进入时优先保留当前端口，没有可用端口时使用7890。返回上一页保存后，切换或更新订阅不会改变共享端口。在连接设备上，将HTTP或SOCKS代理地址设为本机的热点或局域网IP，端口使用上述固定端口。热点IP由手机系统分配，监听地址不能固定热点IP。启动Clash并选择规则或全局模式，发送到代理的流量会跟随该模式。身份验证使用用户名:密码格式。</string>
+    <string name="lan_fixed_port">固定共享端口（HTTP/SOCKS）</string>
+    <string name="lan_invalid_port">请输入1至65535之间的端口号</string>
     <string name="lan_connection_details">另一台设备应填写的代理信息</string>
-    <string name="lan_connection_values">IP地址：\n%1$s\nHTTP端口：%2$s\nSOCKS端口：%3$s\n请选择与另一台设备处于同一网络的IP。修改端口后，返回上一页保存并应用。</string>
+    <string name="lan_connection_values">IP地址：\n%1$s\nHTTP端口：%2$s\nSOCKS端口：%3$s\n请选择与另一台设备处于同一网络的IP。返回上一页保存后，端口不再跟随订阅变化。</string>
     <string name="lan_no_address">未检测到局域网IP，请开启热点或连接Wi-Fi后重新进入此页。</string>
 </resources>

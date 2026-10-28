@@ -8,6 +8,7 @@ import com.github.kr328.clash.common.log.Log
 import com.github.kr328.clash.remote.Remote
 import com.github.kr328.clash.service.util.sendServiceRecreated
 import com.github.kr328.clash.util.clashDir
+import com.github.kr328.clash.update.UpdateScheduler
 import java.io.File
 import java.io.FileOutputStream
 
@@ -30,6 +31,7 @@ class MainApplication : Application() {
 
         if (processName == packageName) {
             Remote.launch()
+            UpdateScheduler.schedulePeriodic(this)
         } else {
             sendServiceRecreated()
         }

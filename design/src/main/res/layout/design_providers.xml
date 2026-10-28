@@ -40,8 +40,8 @@
 
                 <ImageView
                     android:id="@+id/update_view"
-                    android:layout_width="@dimen/item_tailing_component_size"
-                    android:layout_height="@dimen/item_tailing_component_size"
+                    android:layout_width="@dimen/toolbar_image_action_size"
+                    android:layout_height="@dimen/toolbar_image_action_size"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="end|center_vertical"
